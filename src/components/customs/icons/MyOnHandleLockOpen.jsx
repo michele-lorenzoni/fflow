@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import MaterialSymbolsLockOpenOutlineSharp from '../../standard/icons/MaterialSymbolsLockOpenOutlineSharp';
+import { useCallback } from "react";
+import MaterialSymbolsLockOpenOutlineSharp from "../../standard/icons/MaterialSymbolsLockOpenOutlineSharp";
 import { buttonStyles } from "../../styles/classNames";
 
 function MyOnHandleLockOpen() {
@@ -8,11 +8,8 @@ function MyOnHandleLockOpen() {
   }, []);
 
   return (
-    <button 
-      className={buttonStyles}
-      onClick={handleClick}
-    >
-      <MaterialSymbolsLockOpenOutlineSharp width="18px" height="18px"/>
+    <button className={buttonStyles} onClick={handleClick}>
+      <MaterialSymbolsLockOpenOutlineSharp width="18px" height="18px" />
     </button>
   );
 }

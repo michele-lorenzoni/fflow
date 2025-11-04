@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import MaterialSymbolsGrid3x3 from '../../standard/icons/MaterialSymbolsGrid3x3';
+import { useCallback } from "react";
+import MaterialSymbolsGrid3x3 from "../../standard/icons/MaterialSymbolsGrid3x3";
 import { buttonStyles } from "../../styles/classNames";
 
 function MyOnHandleGrid3x3() {
@@ -8,11 +8,8 @@ function MyOnHandleGrid3x3() {
   }, []);
 
   return (
-    <button 
-      className={buttonStyles}
-      onClick={handleClick}
-    >
-      <MaterialSymbolsGrid3x3 width="18px" height="18px"/>
+    <button className={buttonStyles} onClick={handleClick}>
+      <MaterialSymbolsGrid3x3 width="18px" height="18px" />
     </button>
   );
 }

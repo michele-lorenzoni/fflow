@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import MaterialSymbolsGridViewSharp from '../../standard/icons/MaterialSymbolsGridViewSharp';
+import { useCallback } from "react";
+import MaterialSymbolsGridViewSharp from "../../standard/icons/MaterialSymbolsGridViewSharp";
 import { buttonStyles } from "../../styles/classNames";
 
 function MyOnHandleGridView() {
@@ -8,11 +8,8 @@ function MyOnHandleGridView() {
   }, []);
 
   return (
-    <button 
-      className={buttonStyles}
-      onClick={handleClick}
-    >
-      <MaterialSymbolsGridViewSharp width="18px" height="18px"/>
+    <button className={buttonStyles} onClick={handleClick}>
+      <MaterialSymbolsGridViewSharp width="18px" height="18px" />
     </button>
   );
 }

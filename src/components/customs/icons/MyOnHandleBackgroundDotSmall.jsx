@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import MaterialSymbolsBackgroundDotSmallSharp from '../../standard/icons/MaterialSymbolsBackgroundDotSmallSharp';
+import { useCallback } from "react";
+import MaterialSymbolsBackgroundDotSmallSharp from "../../standard/icons/MaterialSymbolsBackgroundDotSmallSharp";
 import { buttonStyles } from "../../styles/classNames";
 
 function MyOnHandleBackgroundDotSmall() {
@@ -8,11 +8,8 @@ function MyOnHandleBackgroundDotSmall() {
   }, []);
 
   return (
-    <button 
-      className={buttonStyles}
-      onClick={handleClick}
-    >
-      <MaterialSymbolsBackgroundDotSmallSharp width="18px" height="18px"/>
+    <button className={buttonStyles} onClick={handleClick}>
+      <MaterialSymbolsBackgroundDotSmallSharp width="18px" height="18px" />
     </button>
   );
 }

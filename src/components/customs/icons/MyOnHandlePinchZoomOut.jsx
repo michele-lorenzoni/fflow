@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import MaterialSymbolsPinchZoomOutOutlineSharp from '../../standard/icons/MaterialSymbolsPinchZoomOutOutlineSharp';
+import { useCallback } from "react";
+import MaterialSymbolsPinchZoomOutOutlineSharp from "../../standard/icons/MaterialSymbolsPinchZoomOutOutlineSharp";
 import { buttonStyles } from "../../styles/classNames";
 
 function MyOnHandlePinchZoomOut() {
@@ -8,11 +8,8 @@ function MyOnHandlePinchZoomOut() {
   }, []);
 
   return (
-    <button 
-      className={buttonStyles}
-      onClick={handleClick}
-    >
-      <MaterialSymbolsPinchZoomOutOutlineSharp width="18px" height="18px"/>
+    <button className={buttonStyles} onClick={handleClick}>
+      <MaterialSymbolsPinchZoomOutOutlineSharp width="18px" height="18px" />
     </button>
   );
 }

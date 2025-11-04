@@ -2,7 +2,9 @@
 
 @theme {
   --color-test: oklch(0.637 0.237 25.331); /* HEX=#fb2c36 TAILWINDCSS=red-500 */
-  --color-menu-border: oklch(0.708 0 0); /* HEX=#a1a1a1 TAILWINDCSS=neutral-400 */
+  --color-menu-border: oklch(
+    0.708 0 0
+  ); /* HEX=#a1a1a1 TAILWINDCSS=neutral-400 */
   --color-menu-bg: oklch(0.922 0 0); /* HEX=#e5e5e5 TAILWINDCSS=neutral-200 */
   --color-menu-icon: oklch(0.556 0 0); /* HEX=#737373 TAILWINDCSS=neutral-500 */
   --color-menu-light: oklch(0.97 0 0); /* HEX=#f5f5f5 TAILWINDCSS=neutral-100 */
