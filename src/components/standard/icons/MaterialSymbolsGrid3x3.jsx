@@ -1,0 +1,5 @@
+import { iconStyles } from "../../styles/classNames";
+
+export default function MaterialSymbolsGrid3x3(props) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path className={iconStyles} d="M8 20v-4H4v-2h4v-4H4V8h4V4h2v4h4V4h2v4h4v2h-4v4h4v2h-4v4h-2v-4h-4v4zm2-6h4v-4h-4z"></path></svg>);
+}
