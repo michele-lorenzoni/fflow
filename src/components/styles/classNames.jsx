@@ -7,6 +7,6 @@ export const buttonMenuStyles =
 export const iconStyles =
   "fill-menu-icon transition-all duration-300 group-active:fill-sky-700";
 export const textareaStyles =
-  "flex-1 bg-menu-bg text-menu-icon px-3 py-3 border-1 border-menu-border text-xs outline-0 resize-none caret-transparent";
+  "flex-1 bg-menu-bg text-menu-icon px-3 py-3 border-x-1 border-b-1 border-menu-border text-xs outline-0 resize-none caret-transparent";
 export const separator = "border-l-1 border-menu-border";
 export const flexHFull = "flex h-full";

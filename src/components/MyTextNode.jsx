@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { NodeResizer } from "@xyflow/react";
 import { textareaStyles } from "./styles/classNames";
-
-import { DiJsBadge } from "react-icons/di";
+import { CPlusPlus } from "developer-icons";
 import MyHandle from "./MyHandle";
 
 function MyTextNode(props) {
@@ -48,20 +47,19 @@ function MyTextNode(props) {
           height: "100%",
         }}
       >
-        {/* Title */}
-        <div className="bg-menu-bg text-menu-icon h-[32px] flex flex-row border-1 border-b-0 border-menu-border">
+        <div className="bg-menu-bg text-menu-icon flex flex-row border border-menu-border">
           <div className="flex items-center justify-center h-[32px] w-[32px]">
-            <DiJsBadge className="h-[18px] w-[18px]" />
+            <CPlusPlus className="h-[18px] w-[18px]" />
           </div>
-          <div className="bg-menu-bg text-menu-icon h-[32px] px-3 flex items-center justify-between border-x-1 border-menu-border text-xs italic">
-            <p>hello_world.js</p>
+          <div className="bg-menu-bg text-menu-icon px-3 border-x-1 flex items-center justify-between text-xs italic border-menu-border">
+            <p>hello_world.cpp</p>
           </div>
         </div>
 
         {/* Body */}
         <textarea
           className={textareaStyles}
-          defaultValue="Lorem Ipsum"
+          defaultValue=""
           spellCheck="false"
           autoCorrect="off"
           autoCapitalize="off"
