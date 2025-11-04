@@ -8,10 +8,10 @@ function MyOnHandleScreenRecord() {
   const handleClick = useCallback(() => {
     if (isClicked == false) {
       setIsClicked(true);
-      console.log(isClicked);
+      // console.log(isClicked);
     } else {
       setIsClicked(false);
-      console.log(isClicked);
+      // console.log(isClicked);
     }
   }, [isClicked]);
 

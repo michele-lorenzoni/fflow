@@ -1,3 +1,5 @@
+import { iconStyles } from "../../styles/classNames";
+
 export default function MaterialSymbolsGridViewSharp(props) {
   return (
     <svg
@@ -8,7 +10,7 @@ export default function MaterialSymbolsGridViewSharp(props) {
       {...props}
     >
       <path
-        fill="currentColor"
+        className={iconStyles}
         d="M3 11V3h8v8zm0 10v-8h8v8zm10-10V3h8v8zm0 10v-8h8v8z"
       ></path>
     </svg>
