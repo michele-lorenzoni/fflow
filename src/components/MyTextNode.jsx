@@ -3,8 +3,6 @@ import { NodeResizer } from "@xyflow/react";
 import { textareaStyles } from "./styles/classNames";
 
 import { DiJsBadge } from "react-icons/di";
-import { separator } from "./styles/classNames";
-import MyOnHandlePinchZoomOut from "./customs/icons/MyOnHandlePinchZoomOut";
 import MyHandle from "./MyHandle";
 
 function MyTextNode(props) {

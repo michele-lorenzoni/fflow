@@ -7,7 +7,7 @@ import MyToolBar from "./MyToolBar";
 
 function MyMenu({ onScreenshot }) {
   const [isClicked, setIsClicked] = useState(false);
-  
+
   const handleClick = useCallback(() => {
     if (isClicked == false) {
       setIsClicked(true);
@@ -17,7 +17,7 @@ function MyMenu({ onScreenshot }) {
       // console.log(isClicked);
     }
   }, [isClicked]);
-    
+
   return (
     <>
       {/* MenuBar */}
@@ -27,7 +27,9 @@ function MyMenu({ onScreenshot }) {
           <div className={separator}></div>
           <button className={buttonMenuStyles}>Edit</button>
           <div className={separator}></div>
-          <button className={buttonMenuStyles} onClick={handleClick}>View</button>
+          <button className={buttonMenuStyles} onClick={handleClick}>
+            View
+          </button>
           <div className={separator}></div>
           <button className={buttonMenuStyles}>Preferences</button>
         </div>
@@ -42,7 +44,10 @@ function MyMenu({ onScreenshot }) {
       </div>
 
       {/* ToolBar */}
-      <MyToolBar onScreenshot={onScreenshot} className={`${isClicked ? "top-0" : "top-[32px]"}`}/>
+      <MyToolBar
+        onScreenshot={onScreenshot}
+        className={`${isClicked ? "top-0" : "top-[32px]"}`}
+      />
     </>
   );
 }
