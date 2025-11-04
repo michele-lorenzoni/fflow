@@ -7,7 +7,11 @@ function MyHandle() {
 
   return (
     <>
-      <Handle type="source" position={Position.Top} className="!rounded-none !border-menu-border !bg-[#fafafa] !h-[5px] !w-[5px]" />
+      <Handle
+        type="source"
+        position={Position.Top}
+        className="!rounded-none !border-menu-border !bg-[#fafafa] !h-[5px] !w-[5px]"
+      />
       <Handle
         type="target"
         position={Position.Bottom}
