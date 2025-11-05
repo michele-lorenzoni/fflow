@@ -7,6 +7,9 @@ import MyOnHandleScreenshotKeyboard from "./customs/icons/MyOnHandleScreenshotKe
 import MyOnHandleScreenRecord from "./customs/icons/MyOnHandleScreenRecord";
 import MyOnHandleBackgroundDotSmall from "./customs/icons/MyOnHandleBackgroundDotSmall";
 import MyOnHandleGridView from "./customs/icons/MyOnHandleGridView";
+import MyOnHandleAdd from "./customs/icons/MyOnHandleAdd";
+
+import MyTooltipButton from "./MyTooltipButton";
 
 function MyFileToolBar({ onScreenshot, className }) {
   return (
@@ -14,7 +17,11 @@ function MyFileToolBar({ onScreenshot, className }) {
       className={`shadow-md/5 w-full box-border bg-menu-bg border-b-1 border-menu-border text-[#767c8a] text-xs flex items-center justify-between fixed z-99 h-[32px] transition-all duration-300 ${className}`}
     >
       <div className="flex h-full">
-        <MyOnHandlePinchZoomOut />
+        <MyTooltipButton
+            tooltip="Open File"
+        >
+            <MyOnHandleAdd />
+        </MyTooltipButton>
         <MyOnHandlePinchZoomIn />
         <MyOnHandleFilterCenterFocus />
         <MyOnHandleLockOpen />
