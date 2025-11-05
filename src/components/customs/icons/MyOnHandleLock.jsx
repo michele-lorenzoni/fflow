@@ -9,10 +9,8 @@ function MyOnHandleLock() {
   const handleClick = useCallback(() => {
     if (isClicked == false) {
       setIsClicked(true);
-      // console.log(isClicked);
     } else {
       setIsClicked(false);
-      // console.log(isClicked);
     }
   }, [isClicked]);
 
