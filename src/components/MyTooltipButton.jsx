@@ -1,5 +1,3 @@
-import MyOnHandleAdd from "./customs/icons/MyOnHandleAdd";
-
 function MyTooltipButton({ children, tooltip }) {
   return (
     <div className="relative group">
