@@ -60,11 +60,9 @@ function MyMenu({ onScreenshot }) {
 
       {/* Toolbars */}
       <MyFileToolBar
-        onScreenshot={onScreenshot}
         className={`${activeToolbar === "file" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyEditToolBar
-        onScreenshot={onScreenshot}
         className={`${activeToolbar === "edit" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyViewToolBar
@@ -72,7 +70,6 @@ function MyMenu({ onScreenshot }) {
         className={`${activeToolbar === "view" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyPreferencesToolBar
-        onScreenshot={onScreenshot}
         className={`${activeToolbar === "preferences" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
     </>

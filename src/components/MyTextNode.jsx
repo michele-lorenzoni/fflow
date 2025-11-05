@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { NodeResizer } from "@xyflow/react";
 import { textareaStyles } from "./styles/classNames";
 import { CPlusPlus } from "developer-icons";
@@ -11,6 +11,12 @@ function MyTextNode(props) {
     width: 224,
     height: 124,
   });
+
+  const [isClicked, setIsClicked] = useState(null);
+
+  const handleClick = useCallback((toolbarName) => {
+    setIsClicked((prev) => (prev === toolbarName ? null : toolbarName));
+  }, []);
 
   useEffect(() => {
     if (contentRef.current) {
@@ -48,22 +54,25 @@ function MyTextNode(props) {
         }}
       >
         <div className="bg-menu-bg text-menu-icon flex flex-row border border-menu-border">
-          <div className="flex items-center justify-center h-[32px] w-[32px]">
+          <button
+            onClick={() => handleClick("file")}
+            className="flex items-center justify-center h-[32px] w-[32px] hover:bg-[#fafafa] transition-all duration-300"
+          >
             <CPlusPlus className="h-[18px] w-[18px]" />
-          </div>
-          <div className="bg-menu-bg text-menu-icon px-3 border-x-1 flex items-center justify-between text-xs italic border-menu-border">
+          </button>
+          <button className="bg-menu-bg text-menu-icon px-3 border-x-1 flex items-center justify-between text-xs italic border-menu-border hover:bg-[#fafafa] transition-all duration-300">
             <p>hello_world.cpp</p>
-          </div>
+          </button>
         </div>
 
         {/* Body */}
-        <textarea
-          className={textareaStyles}
-          defaultValue=""
-          spellCheck="false"
-          autoCorrect="off"
-          autoCapitalize="off"
-        ></textarea>
+        <button
+          className={
+            isClicked
+              ? `${textareaStyles} hover:bg-[#fafafa] transition-all duration-300`
+              : `${textareaStyles} hover:bg-[#fafafa] transition-all duration-300`
+          }
+        />
         <MyHandle />
       </div>
     </>

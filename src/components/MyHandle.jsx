@@ -8,7 +8,7 @@ function MyHandle() {
 
   return (
     <>
-      <Handle type="source" position={Position.Top} className={handleStyles} />
+      {/* <Handle type="source" position={Position.Top} className={handleStyles} /> */}
       <Handle
         type="target"
         position={Position.Bottom}
