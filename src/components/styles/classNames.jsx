@@ -8,7 +8,9 @@ export const iconStyles =
   "fill-menu-icon transition-all duration-300 group-active:fill-sky-700";
 export const textareaStyles =
   "flex-1 bg-menu-bg text-menu-icon px-3 py-3 border-x-1 border-b-1 border-menu-border text-xs outline-0 resize-none caret-transparent";
-export const separator = "border-l-1 border-menu-border";
+export const separator = "w-[1px] h-full bg-menu-border";
 export const flexHFull = "flex h-full";
 export const handleStyles =
   "!rounded-none !border-menu-border !bg-[#fafafa] !h-[5px] !w-[5px]";
+export const toolbarStyles =
+  "shadow-md/5 w-full box-border bg-menu-bg border-b-1 border-menu-border text-[#767c8a] text-xs flex items-center justify-between fixed z-99 h-[32px] transition-all duration-300";

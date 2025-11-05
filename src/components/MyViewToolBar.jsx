@@ -7,22 +7,23 @@ import MyOnHandleScreenshotKeyboard from "./customs/icons/MyOnHandleScreenshotKe
 import MyOnHandleScreenRecord from "./customs/icons/MyOnHandleScreenRecord";
 import MyOnHandleBackgroundDotSmall from "./customs/icons/MyOnHandleBackgroundDotSmall";
 import MyOnHandleGridView from "./customs/icons/MyOnHandleGridView";
+import MySeparator from "./MySeparator";
+
+import { toolbarStyles } from "./styles/classNames";
 
 function MyViewToolBar({ onScreenshot, className }) {
   return (
-    <div
-      className={`shadow-md/5 w-full box-border bg-menu-bg border-b-1 border-menu-border text-[#767c8a] text-xs flex items-center justify-between fixed z-99 h-[32px] transition-all duration-300 ${className}`}
-    >
+    <div className={`${toolbarStyles} ${className}`}>
       <div className="flex h-full">
         <MyOnHandlePinchZoomOut />
         <MyOnHandlePinchZoomIn />
         <MyOnHandleFilterCenterFocus />
         <MyOnHandleLock />
-        <div className="border-l-1 border-menu-border"></div>
+        <MySeparator />
         <MyOnHandleGrid3x3 />
         <MyOnHandleBackgroundDotSmall />
         <MyOnHandleGridView />
-        <div className="border-l-1 border-menu-border"></div>
+        <MySeparator />
         <MyOnHandleScreenshotKeyboard onScreenshot={onScreenshot} />
         <MyOnHandleScreenRecord />
       </div>
