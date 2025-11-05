@@ -8,7 +8,7 @@ import MyOnHandleScreenRecord from "./customs/icons/MyOnHandleScreenRecord";
 import MyOnHandleBackgroundDotSmall from "./customs/icons/MyOnHandleBackgroundDotSmall";
 import MyOnHandleGridView from "./customs/icons/MyOnHandleGridView";
 
-function MyToolBar({ onScreenshot, className }) {
+function MyPreferencesToolBar({ onScreenshot, className }) {
   return (
     <div
       className={`shadow-md/5 w-full box-border bg-menu-bg border-b-1 border-menu-border text-[#767c8a] text-xs flex items-center justify-between fixed z-99 h-[32px] transition-all duration-300 ${className}`}
@@ -30,4 +30,4 @@ function MyToolBar({ onScreenshot, className }) {
   );
 }
 
-export default MyToolBar;
+export default MyPreferencesToolBar;

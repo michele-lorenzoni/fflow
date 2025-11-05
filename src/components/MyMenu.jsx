@@ -3,35 +3,50 @@ import MyOnHandleMode from "./customs/icons/MyOnHandleMode";
 import MyOnHandleFavorite from "./customs/icons/MyOnHandleFavorite";
 import { buttonMenuStyles, flexHFull, separator } from "./styles/classNames";
 
-import MyToolBar from "./MyToolBar";
+import MyViewToolBar from "./MyViewToolBar";
+import MyEditToolBar from "./MyEditToolBar";
+import MyFileToolBar from "./MyFileToolBar";
+import MyPreferencesToolBar from "./MyPreferencesToolBar";
 
 function MyMenu({ onScreenshot }) {
-  const [isClicked, setIsClicked] = useState(false);
+  const [activeToolbar, setActiveToolbar] = useState(null);
 
-  const handleClick = useCallback(() => {
-    if (isClicked == false) {
-      setIsClicked(true);
-      // console.log(isClicked);
-    } else {
-      setIsClicked(false);
-      // console.log(isClicked);
-    }
-  }, [isClicked]);
+  const handleToolbarToggle = useCallback((toolbarName) => {
+    setActiveToolbar(prev => prev === toolbarName ? null : toolbarName);
+  }, []);
 
   return (
     <>
       {/* MenuBar */}
       <div className="w-full box-border bg-menu-bg border-b-1 border-menu-border text-menu-icon text-xs flex items-center justify-between fixed z-100 h-[32px]">
         <div className={flexHFull}>
-          <button className={buttonMenuStyles}>File</button>
+          <button 
+            className={buttonMenuStyles}
+            onClick={() => handleToolbarToggle('file')}
+          >
+            File
+          </button>
           <div className={separator}></div>
-          <button className={buttonMenuStyles}>Edit</button>
+          <button 
+            className={buttonMenuStyles}
+            onClick={() => handleToolbarToggle('edit')}
+          >
+            Edit
+          </button>
           <div className={separator}></div>
-          <button className={buttonMenuStyles} onClick={handleClick}>
+          <button 
+            className={buttonMenuStyles}
+            onClick={() => handleToolbarToggle('view')}
+          >
             View
           </button>
           <div className={separator}></div>
-          <button className={buttonMenuStyles}>Preferences</button>
+          <button 
+            className={buttonMenuStyles}
+            onClick={() => handleToolbarToggle('preferences')}
+          >
+            Preferences
+          </button>
         </div>
         <div className={flexHFull}>
           <div className="h-full bg-neutral-950">
@@ -43,10 +58,22 @@ function MyMenu({ onScreenshot }) {
         </div>
       </div>
 
-      {/* ToolBar */}
-      <MyToolBar
+      {/* Toolbars */}
+      <MyFileToolBar
         onScreenshot={onScreenshot}
-        className={`${isClicked ? "top-0" : "top-[32px]"}`}
+        className={`${activeToolbar === 'file' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
+      />
+      <MyEditToolBar
+        onScreenshot={onScreenshot}
+        className={`${activeToolbar === 'edit' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
+      />
+      <MyViewToolBar
+        onScreenshot={onScreenshot}
+        className={`${activeToolbar === 'view' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
+      />
+      <MyPreferencesToolBar
+        onScreenshot={onScreenshot}
+        className={`${activeToolbar === 'preferences' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
     </>
   );
