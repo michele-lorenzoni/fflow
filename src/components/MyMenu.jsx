@@ -12,7 +12,7 @@ function MyMenu({ onScreenshot }) {
   const [activeToolbar, setActiveToolbar] = useState(null);
 
   const handleToolbarToggle = useCallback((toolbarName) => {
-    setActiveToolbar(prev => prev === toolbarName ? null : toolbarName);
+    setActiveToolbar((prev) => (prev === toolbarName ? null : toolbarName));
   }, []);
 
   return (
@@ -20,30 +20,30 @@ function MyMenu({ onScreenshot }) {
       {/* MenuBar */}
       <div className="w-full box-border bg-menu-bg border-b-1 border-menu-border text-menu-icon text-xs flex items-center justify-between fixed z-100 h-[32px]">
         <div className={flexHFull}>
-          <button 
+          <button
             className={buttonMenuStyles}
-            onClick={() => handleToolbarToggle('file')}
+            onClick={() => handleToolbarToggle("file")}
           >
             File
           </button>
           <div className={separator}></div>
-          <button 
+          <button
             className={buttonMenuStyles}
-            onClick={() => handleToolbarToggle('edit')}
+            onClick={() => handleToolbarToggle("edit")}
           >
             Edit
           </button>
           <div className={separator}></div>
-          <button 
+          <button
             className={buttonMenuStyles}
-            onClick={() => handleToolbarToggle('view')}
+            onClick={() => handleToolbarToggle("view")}
           >
             View
           </button>
           <div className={separator}></div>
-          <button 
+          <button
             className={buttonMenuStyles}
-            onClick={() => handleToolbarToggle('preferences')}
+            onClick={() => handleToolbarToggle("preferences")}
           >
             Preferences
           </button>
@@ -61,19 +61,19 @@ function MyMenu({ onScreenshot }) {
       {/* Toolbars */}
       <MyFileToolBar
         onScreenshot={onScreenshot}
-        className={`${activeToolbar === 'file' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
+        className={`${activeToolbar === "file" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyEditToolBar
         onScreenshot={onScreenshot}
-        className={`${activeToolbar === 'edit' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
+        className={`${activeToolbar === "edit" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyViewToolBar
         onScreenshot={onScreenshot}
-        className={`${activeToolbar === 'view' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
+        className={`${activeToolbar === "view" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyPreferencesToolBar
         onScreenshot={onScreenshot}
-        className={`${activeToolbar === 'preferences' ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
+        className={`${activeToolbar === "preferences" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
     </>
   );
