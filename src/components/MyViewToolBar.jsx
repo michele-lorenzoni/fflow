@@ -1,7 +1,7 @@
 import MyOnHandlePinchZoomOut from "./customs/icons/MyOnHandlePinchZoomOut";
 import MyOnHandlePinchZoomIn from "./customs/icons/MyOnHandlePinchZoomIn";
 import MyOnHandleFilterCenterFocus from "./customs/icons/MyOnHandleFilterCenterFocus";
-import MyOnHandleLockOpen from "./customs/icons/MyOnHandleLockOpen";
+import MyOnHandleLock from "./customs/icons/MyOnHandleLock";
 import MyOnHandleGrid3x3 from "./customs/icons/MyOnHandleGrid3x3";
 import MyOnHandleScreenshotKeyboard from "./customs/icons/MyOnHandleScreenshotKeyboard";
 import MyOnHandleScreenRecord from "./customs/icons/MyOnHandleScreenRecord";
@@ -17,7 +17,7 @@ function MyViewToolBar({ onScreenshot, className }) {
         <MyOnHandlePinchZoomOut />
         <MyOnHandlePinchZoomIn />
         <MyOnHandleFilterCenterFocus />
-        <MyOnHandleLockOpen />
+        <MyOnHandleLock />
         <div className="border-l-1 border-menu-border"></div>
         <MyOnHandleGrid3x3 />
         <MyOnHandleBackgroundDotSmall />
