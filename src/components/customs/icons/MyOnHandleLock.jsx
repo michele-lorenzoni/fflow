@@ -21,8 +21,16 @@ function MyOnHandleLock() {
     : MaterialSymbolsLockOpenOutlineSharp;
 
   return (
-    <button className={buttonStyles} onClick={handleClick}>
-      <IconComponent width="18px" height="18px" />
+    <button
+      className={`${buttonStyles}
+    ${isClicked ? "!border-red-700 bg-red-100" : "!border-green-700 bg-green-100"}`}
+      onClick={handleClick}
+    >
+      <IconComponent
+        width="18px"
+        height="18px"
+        className={isClicked ? "fill-red-700" : "fill-green-700"}
+      />
     </button>
   );
 }

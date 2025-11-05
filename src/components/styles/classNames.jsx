@@ -14,3 +14,5 @@ export const handleStyles =
   "!rounded-none !border-menu-border !bg-[#fafafa] !h-[5px] !w-[5px]";
 export const toolbarStyles =
   "shadow-md/5 w-full box-border bg-menu-bg border-b-1 border-menu-border text-[#767c8a] text-xs flex items-center justify-between fixed z-99 h-[32px] transition-all duration-300";
+export const iconLockStyle = "transition-all duration-300 fill-red-700";
+export const iconLockOpenStyle = "transition-all duration-300 fill-green-700";
