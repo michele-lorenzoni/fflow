@@ -26,6 +26,7 @@
     "@xyflow/react": "^12.9.2",
     "developer-icons": "^6.0.4",
     "html-to-image": "^1.11.13",
+    "modern-screenshot": "^4.6.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.16"

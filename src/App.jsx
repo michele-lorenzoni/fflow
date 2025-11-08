@@ -7,7 +7,7 @@ import {
   Background,
   BackgroundVariant,
 } from "@xyflow/react";
-import { toPng } from "html-to-image";
+import { domToPng } from "modern-screenshot";
 
 import MyTextNode from "./components/MyTextNode";
 import MyMenu from "./components/MyMenu";
@@ -39,10 +39,6 @@ function App() {
     return Math.round(value / gridSize) * gridSize;
   };
 
-  // const onNodesChange = useCallback((changes) => {
-  //   setNodes((nds) => applyNodeChanges(changes, nds));
-  // }, []);
-
   const onEdgesChange = useCallback((changes) => {
     setEdges((eds) => applyEdgeChanges(changes, eds));
   }, []);
@@ -51,31 +47,17 @@ function App() {
     setEdges((eds) => addEdge({ ...params, type: "step" }, eds));
   }, []);
 
-  const takeScreenshot = () => {
-    console.log("Inizio screenshot...");
-    const flowElement = document.querySelector(".react-flow");
+  const takeScreenshot = async () => {
+    try {
+      const dataUrl = await domToPng(document.querySelector("#root"));
 
-    if (!flowElement) {
-      console.error("Elemento .react-flow non trovato");
-      return;
+      const link = document.createElement("a");
+      link.download = "screenshot.png";
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error(error);
     }
-
-    toPng(flowElement, {
-      quality: 1,
-      backgroundColor: "#fafafa",
-      pixelRatio: 2,
-      cacheBust: true,
-    })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "reactflow-screenshot.png";
-        link.href = dataUrl;
-        link.click();
-        console.log("Screenshot completato!");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   };
 
   const onNodesChange = useCallback((changes) => {

@@ -66,7 +66,8 @@ function MyTextNode(props) {
         </div>
 
         {/* Body */}
-        <button
+        <textarea
+          spellCheck="false"
           className={
             isClicked
               ? `${textareaStyles} hover:bg-[#fafafa] transition-all duration-300`
