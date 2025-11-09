@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import {
+  useNodesState,
+  useEdgesState,
   addEdge,
   ReactFlow,
-  applyNodeChanges,
-  applyEdgeChanges,
   Background,
   BackgroundVariant,
 } from "@xyflow/react";
@@ -18,7 +18,7 @@ const rfStyle = {
 
 const initialNodes = [
   {
-    id: "node-1",
+    id: `node-${Date.now()}`,
     type: "myTextNode",
     position: { x: 0, y: 0 },
     data: { value: 123 },
@@ -32,20 +32,19 @@ const initialNodes = [
 const nodeTypes = { myTextNode: MyTextNode };
 
 function App() {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-  const snapToGrid = (value, gridSize = 2) => {
-    return Math.round(value / gridSize) * gridSize;
-  };
+  // const snapToGrid = (value, gridSize = 2) => {
+  //   return Math.round(value / gridSize) * gridSize;
+  // };
 
-  const onEdgesChange = useCallback((changes) => {
-    setEdges((eds) => applyEdgeChanges(changes, eds));
-  }, []);
-
-  const onConnect = useCallback((params) => {
-    setEdges((eds) => addEdge({ ...params, type: "step" }, eds));
-  }, []);
+  const onConnect = useCallback(
+    (params) => {
+      setEdges((eds) => addEdge({ ...params, type: "step" }, eds));
+    },
+    [setEdges],
+  );
 
   const takeScreenshot = async () => {
     try {
@@ -60,29 +59,24 @@ function App() {
     }
   };
 
-  const onNodesChange = useCallback((changes) => {
-    setNodes((nds) => {
-      const modifiedChanges = changes.map((change) => {
-        if (change.type === "dimensions" && change.dimensions) {
-          return {
-            ...change,
-            dimensions: {
-              width: snapToGrid(change.dimensions.width),
-              height: snapToGrid(change.dimensions.height),
-            },
-            updateStyle: true,
-          };
-        }
-        return change;
-      });
+  const addNode = useCallback(() => {
+    const newNode = {
+      id: `node-${Date.now()}`,
+      type: "myTextNode",
+      position: { x: 0, y: 0 },
+      data: { value: 0 },
+      style: {
+        width: 224,
+        height: 124,
+      },
+    };
 
-      return applyNodeChanges(modifiedChanges, nds);
-    });
-  }, []);
+    setNodes((nds) => [...nds, newNode]);
+  }, [setNodes]);
 
   return (
     <>
-      <MyMenu onScreenshot={takeScreenshot} />
+      <MyMenu onScreenshot={takeScreenshot} onAdd={addNode} />
       <ReactFlow
         nodes={nodes}
         edges={edges}
