@@ -130,7 +130,7 @@ function App() {
 
   const onConnect = useCallback(
     (params) => {
-      setEdges((eds) => addEdge({ ...params, type: "myStep" }, eds));
+      setEdges((eds) => addEdge({ ...params, type: "myStep", zIndex: 1 }, eds));
     },
     [setEdges],
   );
@@ -346,6 +346,7 @@ function App() {
         edgeTypes={edgeTypes}
         defaultEdgeOptions={{
           type: "myStep",
+          zIndex: 1,
         }}
         connectionLineType="step"
         connectionLineStyle={{
