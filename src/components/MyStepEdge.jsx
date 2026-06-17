@@ -17,6 +17,18 @@ const snapAxis = (value, candidates, gridSize) => {
   return Math.round(value / gridSize) * gridSize;
 };
 
+const pointSegmentDist = (px, py, ax, ay, bx, by) => {
+  const dx = bx - ax;
+  const dy = by - ay;
+  const len2 = dx * dx + dy * dy;
+  if (len2 === 0) return Math.hypot(px - ax, py - ay);
+  let t = ((px - ax) * dx + (py - ay) * dy) / len2;
+  t = Math.max(0, Math.min(1, t));
+  const x = ax + t * dx;
+  const y = ay + t * dy;
+  return Math.hypot(px - x, py - y);
+};
+
 function MyStepEdge({
   id,
   sourceX,
@@ -75,9 +87,46 @@ function MyStepEdge({
     target.addEventListener("pointerup", onUp);
   };
 
+  const removeCorner = (index) => (evt) => {
+    evt.stopPropagation();
+    evt.preventDefault();
+    const next = corners.filter((_, i) => i !== index);
+    updateEdgeData(id, { ...(data ?? {}), corners: next });
+  };
+
+  const addCorner = (evt) => {
+    evt.stopPropagation();
+    const pos = screenToFlowPosition({ x: evt.clientX, y: evt.clientY });
+    if (snapToGrid) {
+      pos.x = Math.round(pos.x / (snapGrid?.[0] ?? 25)) * (snapGrid?.[0] ?? 25);
+      pos.y = Math.round(pos.y / (snapGrid?.[1] ?? 25)) * (snapGrid?.[1] ?? 25);
+    }
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < points.length - 1; i++) {
+      const a = points[i];
+      const b = points[i + 1];
+      const d = pointSegmentDist(pos.x, pos.y, a.x, a.y, b.x, b.y);
+      if (d < bestDist) {
+        bestDist = d;
+        bestIdx = i;
+      }
+    }
+    const next = [...corners.slice(0, bestIdx), pos, ...corners.slice(bestIdx)];
+    updateEdgeData(id, { ...(data ?? {}), corners: next });
+  };
+
   return (
     <>
       <path d={path} fill="none" className="react-flow__edge-path" />
+      <path
+        d={path}
+        fill="none"
+        stroke="transparent"
+        strokeWidth={12}
+        style={{ pointerEvents: "stroke", cursor: "copy" }}
+        onDoubleClick={addCorner}
+      />
       {selected &&
         corners.map((c, i) => {
           const size = 5;
@@ -91,6 +140,7 @@ function MyStepEdge({
               fill="#00a6f4"
               style={{ cursor: "move", pointerEvents: "all" }}
               onPointerDown={startDrag(i)}
+              onDoubleClick={removeCorner(i)}
             />
           );
         })}
