@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useNodes, useReactFlow } from "@xyflow/react";
+import { THEMES } from "./themes";
 
 const LANGUAGES = [
   { key: "c", label: "C", ext: "c" },
@@ -27,6 +29,8 @@ function MyNodeSidebar() {
   const selected = nodes.filter((n) => n.selected);
   const open = selected.length === 1;
   const node = selected[0];
+  const [themesOpen, setThemesOpen] = useState(false);
+  const [openTheme, setOpenTheme] = useState(null);
 
   const patchStyle = (patch) => {
     if (!node) return;
@@ -150,6 +154,69 @@ function MyNodeSidebar() {
                   patchStyle({ height: Number(e.target.value) || 0 })
                 }
               />
+            </div>
+
+            <div className="flex flex-col mt-2 border-t border-menu-border pt-3">
+              <button
+                type="button"
+                onClick={() => setThemesOpen((o) => !o)}
+                className="flex items-center justify-between h-[28px] px-2 text-xs uppercase tracking-wide text-menu-icon border border-menu-border hover:bg-menu-light transition-colors"
+              >
+                <span>Themes</span>
+                <span className="text-menu-icon/60">
+                  {themesOpen ? "−" : "+"}
+                </span>
+              </button>
+              {themesOpen && (
+                <div className="flex flex-col gap-1 mt-2">
+                  {THEMES.map((t) => {
+                    const isOpen = openTheme === t.name;
+                    return (
+                      <div key={t.name} className="border border-menu-border">
+                        <button
+                          type="button"
+                          onClick={() => setOpenTheme(isOpen ? null : t.name)}
+                          className="flex items-center justify-between w-full h-[26px] px-2 text-xs hover:bg-menu-light transition-colors"
+                        >
+                          <span>{t.name}</span>
+                          <span className="text-menu-icon/60">
+                            {isOpen ? "−" : "+"}
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <div className="flex flex-col gap-1 p-2 border-t border-menu-border">
+                            {t.triads.map((tr, i) => (
+                              <div
+                                key={i}
+                                title={tr.usage}
+                                className="flex items-center gap-1"
+                              >
+                                <div className="flex h-[18px] flex-1 border border-menu-border">
+                                  <div
+                                    className="flex-1"
+                                    style={{ backgroundColor: tr.main }}
+                                  />
+                                  <div
+                                    className="flex-1"
+                                    style={{ backgroundColor: tr.variant }}
+                                  />
+                                  <div
+                                    className="flex-1"
+                                    style={{ backgroundColor: tr.fg }}
+                                  />
+                                </div>
+                                <span className="text-[10px] text-menu-icon/70 truncate w-[90px]">
+                                  {tr.usage}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
