@@ -1,5 +1,76 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Iosevka";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-LightItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-MediumItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-SemiBoldItalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Iosevka";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/iosevka/Iosevka-BoldItalic.ttf") format("truetype");
+}
+
 @theme {
   --color-test: oklch(0.637 0.237 25.331); /* HEX=#fb2c36 TAILWINDCSS=red-500 */
   --color-menu-border: oklch(
@@ -8,6 +79,18 @@
   --color-menu-bg: oklch(0.922 0 0); /* HEX=#e5e5e5 TAILWINDCSS=neutral-200 */
   --color-menu-icon: oklch(0.556 0 0); /* HEX=#737373 TAILWINDCSS=neutral-500 */
   --color-menu-light: oklch(0.97 0 0); /* HEX=#f5f5f5 TAILWINDCSS=neutral-100 */
+
+  --font-sans: "Iosevka", ui-monospace, monospace;
+  --font-mono: "Iosevka", ui-monospace, monospace;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Iosevka", ui-monospace, monospace;
 }
 
 .react-flow__attribution {
