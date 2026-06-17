@@ -90,7 +90,7 @@ function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [gridVariant, setGridVariant] = useState(BackgroundVariant.Cross);
-  const [snapEnabled, setSnapEnabled] = useState(false);
+  const [snapEnabled, setSnapEnabled] = useState(true);
 
   const toggleSnap = useCallback(() => {
     setSnapEnabled((wasEnabled) => {
