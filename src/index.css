@@ -96,3 +96,18 @@ select {
 .react-flow__attribution {
   display: none;
 }
+
+.react-flow {
+  --xy-edge-stroke: var(--color-menu-border);
+  --xy-edge-stroke-selected: #00a6f4;
+}
+
+.react-flow__edge-path {
+  stroke-width: 1;
+}
+
+.react-flow__edge.selectable.selected .react-flow__edge-path,
+.react-flow__edge.selectable:focus .react-flow__edge-path,
+.react-flow__edge.selectable:focus-visible .react-flow__edge-path {
+  stroke-width: 2;
+}
