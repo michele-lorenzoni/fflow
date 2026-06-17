@@ -6,8 +6,6 @@ import {
   ReactFlow,
   Background,
   BackgroundVariant,
-  Position,
-  getSmoothStepPath,
   useReactFlow,
 } from "@xyflow/react";
 import { domToPng } from "modern-screenshot";
@@ -32,13 +30,6 @@ const LANGUAGES_META = {
 
 const SNAP_GRID = 25;
 const snap = (v) => Math.round((Number(v) || 0) / SNAP_GRID) * SNAP_GRID;
-
-const SIDE_TO_POSITION = {
-  top: Position.Top,
-  right: Position.Right,
-  bottom: Position.Bottom,
-  left: Position.Left,
-};
 
 const escapeXml = (s) =>
   String(s ?? "")
@@ -68,6 +59,8 @@ const handlePoint = (node, handleId, fallbackSide) => {
 
 import MyTextNode from "./components/MyTextNode";
 import MyMenu from "./components/MyMenu";
+import MyStepEdge from "./components/MyStepEdge";
+import { computeDefaultCorners } from "./components/stepEdgeCorners";
 
 const rfStyle = {
   backgroundColor: "#fafafa",
@@ -87,6 +80,7 @@ const initialNodes = [
 ];
 
 const nodeTypes = { myTextNode: MyTextNode };
+const edgeTypes = { myStep: MyStepEdge };
 
 function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -132,7 +126,7 @@ function App() {
 
   const onConnect = useCallback(
     (params) => {
-      setEdges((eds) => addEdge({ ...params, type: "step" }, eds));
+      setEdges((eds) => addEdge({ ...params, type: "myStep" }, eds));
     },
     [setEdges],
   );
@@ -227,15 +221,13 @@ function App() {
           if (!sourceNode || !targetNode) return "";
           const s = handlePoint(sourceNode, e.sourceHandle, "right");
           const t = handlePoint(targetNode, e.targetHandle, "left");
-          const [path] = getSmoothStepPath({
-            sourceX: s.x,
-            sourceY: s.y,
-            sourcePosition: SIDE_TO_POSITION[s.side],
-            targetX: t.x,
-            targetY: t.y,
-            targetPosition: SIDE_TO_POSITION[t.side],
-            borderRadius: 0,
-          });
+          const corners =
+            e.data?.corners ??
+            computeDefaultCorners(s.x, s.y, t.x, t.y, s.side, t.side);
+          const pts = [{ x: s.x, y: s.y }, ...corners, { x: t.x, y: t.y }];
+          const path = pts
+            .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
+            .join(" ");
           return `<path d="${path}" fill="none" stroke="${BORDER}" stroke-width="1"/>`;
         })
         .join("\n  ");
@@ -323,8 +315,9 @@ function App() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         defaultEdgeOptions={{
-          type: "step",
+          type: "myStep",
         }}
         connectionLineType="step"
         connectionLineStyle={{
