@@ -31,6 +31,7 @@ function MyNodeSidebar() {
   const node = selected[0];
   const [themesOpen, setThemesOpen] = useState(false);
   const [openTheme, setOpenTheme] = useState(null);
+  const [selectedTriad, setSelectedTriad] = useState(null);
 
   const patchStyle = (patch) => {
     if (!node) return;
@@ -156,7 +157,8 @@ function MyNodeSidebar() {
               />
             </div>
 
-            <div className="flex flex-col mt-2 border-t border-menu-border pt-3">
+            <div className="my-2 h-px bg-menu-border" />
+            <div className="flex flex-col">
               <button
                 type="button"
                 onClick={() => setThemesOpen((o) => !o)}
@@ -184,32 +186,46 @@ function MyNodeSidebar() {
                           </span>
                         </button>
                         {isOpen && (
-                          <div className="flex flex-col gap-1 p-2 border-t border-menu-border">
-                            {t.triads.map((tr, i) => (
-                              <div
-                                key={i}
-                                title={tr.usage}
-                                className="flex items-center gap-1"
-                              >
-                                <div className="flex h-[18px] flex-1 border border-menu-border">
-                                  <div
-                                    className="flex-1"
-                                    style={{ backgroundColor: tr.main }}
-                                  />
-                                  <div
-                                    className="flex-1"
-                                    style={{ backgroundColor: tr.variant }}
-                                  />
-                                  <div
-                                    className="flex-1"
-                                    style={{ backgroundColor: tr.fg }}
-                                  />
-                                </div>
-                                <span className="text-[10px] text-menu-icon/70 truncate w-[90px]">
-                                  {tr.usage}
-                                </span>
-                              </div>
-                            ))}
+                          <div className="flex flex-col gap-2 p-2 border-t border-menu-border">
+                            {t.triads.map((tr, i) => {
+                              const triadId = `${t.name}::${i}`;
+                              const isTriadSelected = selectedTriad === triadId;
+                              return (
+                                <button
+                                  type="button"
+                                  key={i}
+                                  title={tr.usage}
+                                  onClick={() =>
+                                    setSelectedTriad(
+                                      isTriadSelected ? null : triadId,
+                                    )
+                                  }
+                                  className={`flex items-center gap-1 p-1 -m-1 text-left transition-colors ${
+                                    isTriadSelected
+                                      ? "bg-sky-50 outline outline-sky-500"
+                                      : "hover:bg-menu-light"
+                                  }`}
+                                >
+                                  <div className="flex h-[18px] flex-1 border border-menu-border">
+                                    <div
+                                      className="flex-1"
+                                      style={{ backgroundColor: tr.main }}
+                                    />
+                                    <div
+                                      className="flex-1"
+                                      style={{ backgroundColor: tr.variant }}
+                                    />
+                                    <div
+                                      className="flex-1"
+                                      style={{ backgroundColor: tr.fg }}
+                                    />
+                                  </div>
+                                  <span className="text-[10px] text-menu-icon/70 truncate w-[90px]">
+                                    {tr.usage}
+                                  </span>
+                                </button>
+                              );
+                            })}
                           </div>
                         )}
                       </div>
