@@ -35,7 +35,7 @@ const nodeTypes = { myTextNode: MyTextNode };
 function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const { fitView } = useReactFlow();
+  const { fitView, screenToFlowPosition } = useReactFlow();
 
   const focusSelected = useCallback(() => {
     const selected = nodes.filter((n) => n.selected);
@@ -69,19 +69,27 @@ function App() {
   };
 
   const addNode = useCallback(() => {
+    const width = 224;
+    const height = 124;
+    const center = screenToFlowPosition({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+    const jitter = () => Math.round((Math.random() - 0.5) * 80);
+
     const newNode = {
       id: `node-${Date.now()}`,
       type: "myTextNode",
-      position: { x: 0, y: 0 },
-      data: { value: 0 },
-      style: {
-        width: 260,
-        height: 180,
+      position: {
+        x: center.x - width / 2 + jitter(),
+        y: center.y - height / 2 + jitter(),
       },
+      data: { value: 0 },
+      style: { width, height },
     };
 
     setNodes((nds) => [...nds, newNode]);
-  }, [setNodes]);
+  }, [setNodes, screenToFlowPosition]);
 
   return (
     <>
