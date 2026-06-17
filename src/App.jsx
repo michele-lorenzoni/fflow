@@ -150,7 +150,19 @@ function App() {
     }
   };
 
-  const exportSvg = () => {
+  const fontToDataUrl = async (path) => {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`font fetch failed: ${path}`);
+    const blob = await res.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const exportSvg = async () => {
     try {
       const currentNodes = getNodes();
       const currentEdges = getEdges();
@@ -160,7 +172,6 @@ function App() {
       const HEADER_H = 32;
       const FOOTER_H = 20;
       const ICON_W = 32;
-      const BG = "#fafafa";
       const NODE_BG = "#e5e5e5";
       const BORDER = "#a1a1a1";
       const FG = "#737373";
@@ -229,9 +240,31 @@ function App() {
         })
         .join("\n  ");
 
+      const [regularUrl, italicUrl] = await Promise.all([
+        fontToDataUrl("/fonts/iosevka/Iosevka-Regular.ttf"),
+        fontToDataUrl("/fonts/iosevka/Iosevka-Italic.ttf"),
+      ]);
+
+      const fontFaceCss = `
+    @font-face {
+      font-family: 'Iosevka';
+      font-style: normal;
+      font-weight: 400;
+      src: url('${regularUrl}') format('truetype');
+    }
+    @font-face {
+      font-family: 'Iosevka';
+      font-style: italic;
+      font-weight: 400;
+      src: url('${italicUrl}') format('truetype');
+    }`;
+
       const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="${vbX} ${vbY} ${vbW} ${vbH}" width="${vbW}" height="${vbH}">
-  <rect x="${vbX}" y="${vbY}" width="${vbW}" height="${vbH}" fill="${BG}"/>
+  <defs>
+    <style type="text/css"><![CDATA[${fontFaceCss}
+    ]]></style>
+  </defs>
   ${edgeMarkup}
   ${nodeMarkup}
 </svg>`;
