@@ -8,7 +8,7 @@ import MyEditToolBar from "./MyEditToolBar";
 import MyFileToolBar from "./MyFileToolBar";
 import MyPreferencesToolBar from "./MyPreferencesToolBar";
 
-function MyMenu({ onScreenshot, onAdd }) {
+function MyMenu({ onScreenshot, onAdd, onFocus }) {
   const [activeToolbar, setActiveToolbar] = useState(null);
 
   const handleToolbarToggle = useCallback((toolbarName) => {
@@ -68,6 +68,7 @@ function MyMenu({ onScreenshot, onAdd }) {
       />
       <MyViewToolBar
         onScreenshot={onScreenshot}
+        onFocus={onFocus}
         className={`${activeToolbar === "view" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyPreferencesToolBar

@@ -6,6 +6,7 @@ import {
   ReactFlow,
   Background,
   BackgroundVariant,
+  useReactFlow,
 } from "@xyflow/react";
 import { domToPng } from "modern-screenshot";
 
@@ -34,6 +35,14 @@ const nodeTypes = { myTextNode: MyTextNode };
 function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const { fitView } = useReactFlow();
+
+  const focusSelected = useCallback(() => {
+    const selected = nodes.filter((n) => n.selected);
+    const target = selected.length > 0 ? selected : nodes;
+    if (target.length === 0) return;
+    fitView({ nodes: target, duration: 500, padding: 0.3, maxZoom: 1.5 });
+  }, [nodes, fitView]);
 
   // const snapToGrid = (value, gridSize = 2) => {
   //   return Math.round(value / gridSize) * gridSize;
@@ -76,7 +85,11 @@ function App() {
 
   return (
     <>
-      <MyMenu onScreenshot={takeScreenshot} onAdd={addNode} />
+      <MyMenu
+        onScreenshot={takeScreenshot}
+        onAdd={addNode}
+        onFocus={focusSelected}
+      />
       <ReactFlow
         nodes={nodes}
         edges={edges}

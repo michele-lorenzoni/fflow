@@ -1,14 +1,9 @@
-import { useCallback } from "react";
 import MaterialSymbolsFilterCenterFocusOutlineSharp from "../../standard/icons/MaterialSymbolsFilterCenterFocusOutlineSharp";
 import { buttonStyles } from "../../styles/classNames";
 
-function MyOnHandlePinchZoomIn() {
-  const handleClick = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
-
+function MyOnHandleFilterCenterFocus({ onFocus }) {
   return (
-    <button className={buttonStyles} onClick={handleClick}>
+    <button className={buttonStyles} onClick={onFocus}>
       <MaterialSymbolsFilterCenterFocusOutlineSharp
         width="18px"
         height="18px"
@@ -17,4 +12,4 @@ function MyOnHandlePinchZoomIn() {
   );
 }
 
-export default MyOnHandlePinchZoomIn;
+export default MyOnHandleFilterCenterFocus;

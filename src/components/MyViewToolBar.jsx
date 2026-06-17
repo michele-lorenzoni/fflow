@@ -13,7 +13,7 @@ import MyTooltipButton from "./MyTooltipButton";
 
 import { toolbarStyles } from "./styles/classNames";
 
-function MyViewToolBar({ onScreenshot, className }) {
+function MyViewToolBar({ onScreenshot, onFocus, className }) {
   return (
     <div className={`${toolbarStyles} ${className}`}>
       <div className="flex h-full">
@@ -24,7 +24,7 @@ function MyViewToolBar({ onScreenshot, className }) {
           <MyOnHandlePinchZoomIn />
         </MyTooltipButton>
         <MyTooltipButton tooltip="Focus">
-          <MyOnHandleFilterCenterFocus />
+          <MyOnHandleFilterCenterFocus onFocus={onFocus} />
         </MyTooltipButton>
         <MyTooltipButton tooltip="Lock">
           <MyOnHandleLock />
