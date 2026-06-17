@@ -10,6 +10,7 @@ import MyPreferencesToolBar from "./MyPreferencesToolBar";
 
 function MyMenu({
   onScreenshot,
+  onExportSvg,
   onAdd,
   onFocus,
   gridVariant,
@@ -74,6 +75,7 @@ function MyMenu({
       />
       <MyViewToolBar
         onScreenshot={onScreenshot}
+        onExportSvg={onExportSvg}
         onFocus={onFocus}
         gridVariant={gridVariant}
         onGridVariantChange={onGridVariantChange}

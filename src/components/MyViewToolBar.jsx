@@ -5,6 +5,7 @@ import MyOnHandleLock from "./customs/icons/MyOnHandleLock";
 import MyOnHandleGrid3x3 from "./customs/icons/MyOnHandleGrid3x3";
 import MyOnHandleScreenshotKeyboard from "./customs/icons/MyOnHandleScreenshotKeyboard";
 import MyOnHandleScreenRecord from "./customs/icons/MyOnHandleScreenRecord";
+import MyOnHandleSvgExport from "./customs/icons/MyOnHandleSvgExport";
 import MyOnHandleBackgroundDotSmall from "./customs/icons/MyOnHandleBackgroundDotSmall";
 import MyOnHandleGridView from "./customs/icons/MyOnHandleGridView";
 
@@ -17,6 +18,7 @@ import { toolbarStyles } from "./styles/classNames";
 
 function MyViewToolBar({
   onScreenshot,
+  onExportSvg,
   onFocus,
   gridVariant,
   onGridVariantChange,
@@ -62,6 +64,9 @@ function MyViewToolBar({
         </MyTooltipButton>
         <MyTooltipButton tooltip="Recorder">
           <MyOnHandleScreenRecord />
+        </MyTooltipButton>
+        <MyTooltipButton tooltip="Export SVG">
+          <MyOnHandleSvgExport onExportSvg={onExportSvg} />
         </MyTooltipButton>
       </div>
     </div>
