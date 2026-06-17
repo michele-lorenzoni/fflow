@@ -60,6 +60,7 @@ const handlePoint = (node, handleId, fallbackSide) => {
 import MyTextNode from "./components/MyTextNode";
 import MyAnnotationNode from "./components/MyAnnotationNode";
 import MyMenu from "./components/MyMenu";
+import MyNodeSidebar from "./components/MyNodeSidebar";
 import MyStepEdge from "./components/MyStepEdge";
 import { computeDefaultCorners } from "./components/stepEdgeCorners";
 
@@ -337,6 +338,7 @@ function App() {
         snapEnabled={snapEnabled}
         onSnapToggle={toggleSnap}
       />
+      <MyNodeSidebar />
       <ReactFlow
         nodes={nodes}
         edges={edges}
