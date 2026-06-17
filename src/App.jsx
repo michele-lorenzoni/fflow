@@ -75,8 +75,8 @@ function App() {
       position: { x: 0, y: 0 },
       data: { value: 0 },
       style: {
-        width: 224,
-        height: 124,
+        width: 260,
+        height: 180,
       },
     };
 
