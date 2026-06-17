@@ -53,6 +53,7 @@ function MyNodeSidebar() {
 
   const isCode = node?.type === "myTextNode";
   const isAnnotation = node?.type === "myAnnotationNode";
+  const isTable = node?.type === "myTableNode";
   const w = Math.round(node?.measured?.width ?? node?.style?.width ?? 0);
   const h = Math.round(node?.measured?.height ?? node?.style?.height ?? 0);
 
@@ -65,7 +66,13 @@ function MyNodeSidebar() {
       {node && (
         <div className="flex flex-col h-full">
           <div className="shadow-md/5 box-border h-[31px] px-3 flex items-center border-b-1 border-menu-border text-xs uppercase tracking-wide text-menu-icon">
-            {isCode ? "Codice" : isAnnotation ? "Annotazione" : "Nodo"}
+            {isCode
+              ? "Codice"
+              : isAnnotation
+                ? "Annotazione"
+                : isTable
+                  ? "Tabella"
+                  : "Nodo"}
           </div>
 
           <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2 text-menu-icon">
@@ -116,6 +123,37 @@ function MyNodeSidebar() {
                   ))}
                 </select>
               </>
+            )}
+
+            {isTable && (
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  type="number"
+                  min={1}
+                  className={inputCls}
+                  placeholder="Righe"
+                  value={node.data?.rows ?? 3}
+                  onChange={(e) =>
+                    updateNodeData(node.id, {
+                      ...node.data,
+                      rows: Math.max(1, Number(e.target.value) || 1),
+                    })
+                  }
+                />
+                <input
+                  type="number"
+                  min={1}
+                  className={inputCls}
+                  placeholder="Colonne"
+                  value={node.data?.cols ?? 3}
+                  onChange={(e) =>
+                    updateNodeData(node.id, {
+                      ...node.data,
+                      cols: Math.max(1, Number(e.target.value) || 1),
+                    })
+                  }
+                />
+              </div>
             )}
 
             <div className="grid grid-cols-2 gap-2">

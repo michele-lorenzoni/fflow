@@ -13,6 +13,7 @@ function MyMenu({
   onExportSvg,
   onAddCode,
   onAddAnnotation,
+  onAddTable,
   onFocus,
   gridVariant,
   onGridVariantChange,
@@ -75,6 +76,7 @@ function MyMenu({
       <MyEditToolBar
         onAddCode={onAddCode}
         onAddAnnotation={onAddAnnotation}
+        onAddTable={onAddTable}
         className={`${activeToolbar === "edit" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyViewToolBar

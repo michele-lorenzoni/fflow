@@ -59,6 +59,7 @@ const handlePoint = (node, handleId, fallbackSide) => {
 
 import MyTextNode from "./components/MyTextNode";
 import MyAnnotationNode from "./components/MyAnnotationNode";
+import MyTableNode from "./components/MyTableNode";
 import MyMenu from "./components/MyMenu";
 import MyNodeSidebar from "./components/MyNodeSidebar";
 import MyStepEdge from "./components/MyStepEdge";
@@ -84,6 +85,7 @@ const initialNodes = [
 const nodeTypes = {
   myTextNode: MyTextNode,
   myAnnotationNode: MyAnnotationNode,
+  myTableNode: MyTableNode,
 };
 const edgeTypes = { myStep: MyStepEdge };
 
@@ -325,6 +327,29 @@ function App() {
     setNodes((nds) => [...nds, newNode]);
   }, [setNodes, screenToFlowPosition]);
 
+  const addTable = useCallback(() => {
+    const width = 250;
+    const height = 150;
+    const center = screenToFlowPosition({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+    const jitter = () => Math.round((Math.random() - 0.5) * 80);
+
+    const newNode = {
+      id: `table-${Date.now()}`,
+      type: "myTableNode",
+      position: {
+        x: center.x - width / 2 + jitter(),
+        y: center.y - height / 2 + jitter(),
+      },
+      data: { rows: 3, cols: 3, cells: {} },
+      style: { width, height },
+    };
+
+    setNodes((nds) => [...nds, newNode]);
+  }, [setNodes, screenToFlowPosition]);
+
   return (
     <>
       <MyMenu
@@ -332,6 +357,7 @@ function App() {
         onExportSvg={exportSvg}
         onAddCode={addCode}
         onAddAnnotation={addAnnotation}
+        onAddTable={addTable}
         onFocus={focusSelected}
         gridVariant={gridVariant}
         onGridVariantChange={setGridVariant}

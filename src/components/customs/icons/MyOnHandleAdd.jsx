@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import MaterialSymbolsAddSharp from "../../standard/icons/MaterialSymbolsAddSharp";
 import { buttonStyles } from "../../styles/classNames";
 
-function MyOnHandleAdd({ onAddCode, onAddAnnotation }) {
+function MyOnHandleAdd({ onAddCode, onAddAnnotation, onAddTable }) {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -42,6 +42,13 @@ function MyOnHandleAdd({ onAddCode, onAddAnnotation }) {
             className="flex items-center w-full h-[28px] px-3 text-xs text-left hover:bg-menu-light transition-colors"
           >
             Annotazione
+          </button>
+          <button
+            type="button"
+            onClick={() => pick(onAddTable)}
+            className="flex items-center w-full h-[28px] px-3 text-xs text-left hover:bg-menu-light transition-colors"
+          >
+            Tabella
           </button>
         </div>
       )}
