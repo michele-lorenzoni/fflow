@@ -1,14 +1,12 @@
-import { useCallback } from "react";
 import MaterialSymbolsGridViewSharp from "../../standard/icons/MaterialSymbolsGridViewSharp";
-import { buttonStyles } from "../../styles/classNames";
+import { buttonStyles, buttonActiveStyles } from "../../styles/classNames";
 
-function MyOnHandleGridView() {
-  const handleClick = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
-
+function MyOnHandleGridView({ active, onSelect }) {
   return (
-    <button className={buttonStyles} onClick={handleClick}>
+    <button
+      className={`${buttonStyles} ${active ? buttonActiveStyles : ""}`}
+      onClick={onSelect}
+    >
       <MaterialSymbolsGridViewSharp width="18px" height="18px" />
     </button>
   );

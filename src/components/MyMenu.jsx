@@ -8,7 +8,13 @@ import MyEditToolBar from "./MyEditToolBar";
 import MyFileToolBar from "./MyFileToolBar";
 import MyPreferencesToolBar from "./MyPreferencesToolBar";
 
-function MyMenu({ onScreenshot, onAdd, onFocus }) {
+function MyMenu({
+  onScreenshot,
+  onAdd,
+  onFocus,
+  gridVariant,
+  onGridVariantChange,
+}) {
   const [activeToolbar, setActiveToolbar] = useState(null);
 
   const handleToolbarToggle = useCallback((toolbarName) => {
@@ -69,6 +75,8 @@ function MyMenu({ onScreenshot, onAdd, onFocus }) {
       <MyViewToolBar
         onScreenshot={onScreenshot}
         onFocus={onFocus}
+        gridVariant={gridVariant}
+        onGridVariantChange={onGridVariantChange}
         className={`${activeToolbar === "view" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyPreferencesToolBar

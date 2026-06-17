@@ -1,14 +1,12 @@
-import { useCallback } from "react";
 import MaterialSymbolsBackgroundDotSmallSharp from "../../standard/icons/MaterialSymbolsBackgroundDotSmallSharp";
-import { buttonStyles } from "../../styles/classNames";
+import { buttonStyles, buttonActiveStyles } from "../../styles/classNames";
 
-function MyOnHandleBackgroundDotSmall() {
-  const handleClick = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
-
+function MyOnHandleBackgroundDotSmall({ active, onSelect }) {
   return (
-    <button className={buttonStyles} onClick={handleClick}>
+    <button
+      className={`${buttonStyles} ${active ? buttonActiveStyles : ""}`}
+      onClick={onSelect}
+    >
       <MaterialSymbolsBackgroundDotSmallSharp width="18px" height="18px" />
     </button>
   );

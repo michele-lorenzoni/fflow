@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import {
   useNodesState,
   useEdgesState,
@@ -35,6 +35,7 @@ const nodeTypes = { myTextNode: MyTextNode };
 function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [gridVariant, setGridVariant] = useState(BackgroundVariant.Cross);
   const { fitView, screenToFlowPosition } = useReactFlow();
 
   const focusSelected = useCallback(() => {
@@ -97,6 +98,8 @@ function App() {
         onScreenshot={takeScreenshot}
         onAdd={addNode}
         onFocus={focusSelected}
+        gridVariant={gridVariant}
+        onGridVariantChange={setGridVariant}
       />
       <ReactFlow
         nodes={nodes}
@@ -117,12 +120,7 @@ function App() {
         fitView
         style={rfStyle}
       >
-        <Background
-          id="2"
-          gap={25}
-          color="#d5d5d5"
-          variant={BackgroundVariant.Cross}
-        />
+        <Background id="2" gap={25} color="#d5d5d5" variant={gridVariant} />
       </ReactFlow>
     </>
   );

@@ -11,9 +11,17 @@ import MyOnHandleGridView from "./customs/icons/MyOnHandleGridView";
 import MySeparator from "./MySeparator";
 import MyTooltipButton from "./MyTooltipButton";
 
+import { BackgroundVariant } from "@xyflow/react";
+
 import { toolbarStyles } from "./styles/classNames";
 
-function MyViewToolBar({ onScreenshot, onFocus, className }) {
+function MyViewToolBar({
+  onScreenshot,
+  onFocus,
+  gridVariant,
+  onGridVariantChange,
+  className,
+}) {
   return (
     <div className={`${toolbarStyles} ${className}`}>
       <div className="flex h-full">
@@ -31,13 +39,22 @@ function MyViewToolBar({ onScreenshot, onFocus, className }) {
         </MyTooltipButton>
         <MySeparator />
         <MyTooltipButton tooltip="Lines Grid">
-          <MyOnHandleGrid3x3 />
+          <MyOnHandleGrid3x3
+            active={gridVariant === BackgroundVariant.Lines}
+            onSelect={() => onGridVariantChange(BackgroundVariant.Lines)}
+          />
         </MyTooltipButton>
         <MyTooltipButton tooltip="Dots Grid">
-          <MyOnHandleBackgroundDotSmall />
+          <MyOnHandleBackgroundDotSmall
+            active={gridVariant === BackgroundVariant.Dots}
+            onSelect={() => onGridVariantChange(BackgroundVariant.Dots)}
+          />
         </MyTooltipButton>
         <MyTooltipButton tooltip="Cross Grid">
-          <MyOnHandleGridView />
+          <MyOnHandleGridView
+            active={gridVariant === BackgroundVariant.Cross}
+            onSelect={() => onGridVariantChange(BackgroundVariant.Cross)}
+          />
         </MyTooltipButton>
         <MySeparator />
         <MyTooltipButton tooltip="Screenshoter">

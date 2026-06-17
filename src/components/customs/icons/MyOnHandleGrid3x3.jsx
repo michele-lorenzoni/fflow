@@ -1,14 +1,12 @@
-import { useCallback } from "react";
 import MaterialSymbolsGrid3x3 from "../../standard/icons/MaterialSymbolsGrid3x3";
-import { buttonStyles } from "../../styles/classNames";
+import { buttonStyles, buttonActiveStyles } from "../../styles/classNames";
 
-function MyOnHandleGrid3x3() {
-  const handleClick = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
-
+function MyOnHandleGrid3x3({ active, onSelect }) {
   return (
-    <button className={buttonStyles} onClick={handleClick}>
+    <button
+      className={`${buttonStyles} ${active ? buttonActiveStyles : ""}`}
+      onClick={onSelect}
+    >
       <MaterialSymbolsGrid3x3 width="18px" height="18px" />
     </button>
   );

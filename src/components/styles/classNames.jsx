@@ -1,5 +1,7 @@
 export const buttonStyles =
   "flex justify-center outline-none items-center h-[32px] w-[32px] border-b-1 border-menu-border transition-all duration-300 hover:bg-menu-light active:bg-sky-100 active:border-sky-700 group";
+export const buttonActiveStyles =
+  "bg-sky-100 border-sky-700 [&_path]:fill-sky-700";
 export const buttonModeStyles =
   "flex justify-center outline-none items-center h-[32px] w-[32px] border-b-1 border-neutral-300 transition-all duration-300 hover:bg-[#fafafa] hover:border-neutral-950 group/mode";
 export const buttonMenuStyles =
