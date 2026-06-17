@@ -200,7 +200,8 @@ function App() {
           const { w, h } = sizeOf(n);
           const langKey = n.data?.language ?? "cpp";
           const lang = LANGUAGES_META[langKey] ?? LANGUAGES_META.cpp;
-          const filename = `hello_world.${lang.ext}`;
+          const title = n.data?.title ?? "hello_world";
+          const filename = `${title}.${lang.ext}`;
           const x = n.position.x;
           const y = n.position.y;
           return `

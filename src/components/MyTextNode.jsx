@@ -48,7 +48,11 @@ function MyTextNode({ id, selected, data }) {
   const langKey = data?.language ?? DEFAULT_LANG;
   const lang = LANG_BY_KEY[langKey] ?? LANG_BY_KEY[DEFAULT_LANG];
   const Icon = lang.Icon;
-  const filename = `hello_world.${lang.ext}`;
+  const title = data?.title ?? "hello_world";
+
+  const onTitleChange = (e) => {
+    updateNodeData(id, { ...data, title: e.target.value });
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -113,7 +117,14 @@ function MyTextNode({ id, selected, data }) {
             )}
           </div>
           <div className="flex-1 flex items-center h-full px-3 text-xs italic">
-            {filename}
+            <input
+              type="text"
+              value={title}
+              onChange={onTitleChange}
+              spellCheck="false"
+              className="flex-1 min-w-0 bg-transparent outline-0 italic nodrag"
+            />
+            <span className="shrink-0 italic">.{lang.ext}</span>
           </div>
         </div>
 
