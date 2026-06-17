@@ -1,25 +1,33 @@
+import { Fragment } from "react";
 import { Handle, Position } from "@xyflow/react";
 import { handleStyles } from "./styles/classNames";
 
-function MyHandle() {
-  // const onChange = useCallback((evt) => {
-  //   console.log(evt.target.value);
-  // }, []);
+const sides = [
+  { position: Position.Top, key: "top" },
+  { position: Position.Right, key: "right" },
+  { position: Position.Bottom, key: "bottom" },
+  { position: Position.Left, key: "left" },
+];
 
+function MyHandle() {
   return (
     <>
-      {/* <Handle type="source" position={Position.Top} className={handleStyles} /> */}
-      <Handle
-        type="target"
-        position={Position.Bottom}
-        className={handleStyles}
-      />
-      <Handle type="source" position={Position.Left} className={handleStyles} />
-      <Handle
-        type="target"
-        position={Position.Right}
-        className={handleStyles}
-      />
+      {sides.map(({ position, key }) => (
+        <Fragment key={key}>
+          <Handle
+            id={`${key}-source`}
+            type="source"
+            position={position}
+            className={handleStyles}
+          />
+          <Handle
+            id={`${key}-target`}
+            type="target"
+            position={position}
+            className={handleStyles}
+          />
+        </Fragment>
+      ))}
     </>
   );
 }
