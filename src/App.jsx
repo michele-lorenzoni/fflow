@@ -299,6 +299,7 @@ function App() {
           strokeWidth: 1,
         }}
         connectionRadius={7}
+        deleteKeyCode={["Delete", "Backspace"]}
         snapToGrid={snapEnabled}
         snapGrid={[SNAP_GRID, SNAP_GRID]}
         fitView
