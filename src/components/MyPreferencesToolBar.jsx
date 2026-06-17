@@ -1,9 +1,15 @@
-function MyPreferencesToolBar({ className }) {
+import MyOnHandleSnap from "./customs/icons/MyOnHandleSnap";
+import MyTooltipButton from "./MyTooltipButton";
+import { toolbarStyles } from "./styles/classNames";
+
+function MyPreferencesToolBar({ snapEnabled, onSnapToggle, className }) {
   return (
-    <div
-      className={`shadow-md/5 w-full box-border bg-menu-bg border-b-1 border-menu-border text-[#767c8a] text-xs flex items-center justify-between fixed z-99 h-[32px] transition-all duration-300 ${className}`}
-    >
-      <div className="flex h-full"></div>
+    <div className={`${toolbarStyles} ${className}`}>
+      <div className="flex h-full">
+        <MyTooltipButton tooltip="Snap to grid">
+          <MyOnHandleSnap active={snapEnabled} onToggle={onSnapToggle} />
+        </MyTooltipButton>
+      </div>
     </div>
   );
 }

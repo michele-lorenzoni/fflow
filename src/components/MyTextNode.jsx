@@ -69,8 +69,8 @@ function MyTextNode({ id, selected, data }) {
   return (
     <>
       <NodeResizer
-        minWidth={224}
-        minHeight={140}
+        minWidth={225}
+        minHeight={125}
         isVisible={selected}
         color="#00a6f4"
         lineStyle={{ borderWidth: 1 }}

@@ -30,6 +30,9 @@ const LANGUAGES_META = {
   css: { label: "CSS", ext: "css" },
 };
 
+const SNAP_GRID = 25;
+const snap = (v) => Math.round((Number(v) || 0) / SNAP_GRID) * SNAP_GRID;
+
 const SIDE_TO_POSITION = {
   top: Position.Top,
   right: Position.Right,
@@ -46,8 +49,8 @@ const escapeXml = (s) =>
     .replace(/'/g, "&apos;");
 
 const handlePoint = (node, handleId, fallbackSide) => {
-  const w = node.measured?.width ?? node.width ?? node.style?.width ?? 224;
-  const h = node.measured?.height ?? node.height ?? node.style?.height ?? 124;
+  const w = node.measured?.width ?? node.width ?? node.style?.width ?? 225;
+  const h = node.measured?.height ?? node.height ?? node.style?.height ?? 125;
   const side = (handleId?.split("-")[0] ?? fallbackSide) || "bottom";
   const { x, y } = node.position;
   switch (side) {
@@ -77,8 +80,8 @@ const initialNodes = [
     position: { x: 0, y: 0 },
     data: { value: 123 },
     style: {
-      width: 224,
-      height: 124,
+      width: 225,
+      height: 125,
     },
   },
 ];
@@ -89,6 +92,31 @@ function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [gridVariant, setGridVariant] = useState(BackgroundVariant.Cross);
+  const [snapEnabled, setSnapEnabled] = useState(false);
+
+  const toggleSnap = useCallback(() => {
+    setSnapEnabled((wasEnabled) => {
+      const next = !wasEnabled;
+      if (next) {
+        setNodes((nds) =>
+          nds.map((n) => {
+            const w = n.measured?.width ?? n.width ?? n.style?.width;
+            const h = n.measured?.height ?? n.height ?? n.style?.height;
+            return {
+              ...n,
+              position: { x: snap(n.position.x), y: snap(n.position.y) },
+              style: {
+                ...n.style,
+                width: snap(w),
+                height: snap(h),
+              },
+            };
+          }),
+        );
+      }
+      return next;
+    });
+  }, [setNodes]);
   const { fitView, screenToFlowPosition, getNodes, getEdges } = useReactFlow();
 
   const focusSelected = useCallback(() => {
@@ -138,8 +166,8 @@ function App() {
       const FG = "#737373";
 
       const sizeOf = (n) => ({
-        w: n.measured?.width ?? n.width ?? n.style?.width ?? 224,
-        h: n.measured?.height ?? n.height ?? n.style?.height ?? 124,
+        w: n.measured?.width ?? n.width ?? n.style?.width ?? 225,
+        h: n.measured?.height ?? n.height ?? n.style?.height ?? 125,
       });
 
       let minX = Infinity;
@@ -221,8 +249,8 @@ function App() {
   };
 
   const addNode = useCallback(() => {
-    const width = 224;
-    const height = 124;
+    const width = 225;
+    const height = 125;
     const center = screenToFlowPosition({
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
@@ -252,6 +280,8 @@ function App() {
         onFocus={focusSelected}
         gridVariant={gridVariant}
         onGridVariantChange={setGridVariant}
+        snapEnabled={snapEnabled}
+        onSnapToggle={toggleSnap}
       />
       <ReactFlow
         nodes={nodes}
@@ -269,6 +299,8 @@ function App() {
           strokeWidth: 1,
         }}
         connectionRadius={7}
+        snapToGrid={snapEnabled}
+        snapGrid={[SNAP_GRID, SNAP_GRID]}
         fitView
         style={rfStyle}
       >

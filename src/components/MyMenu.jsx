@@ -15,6 +15,8 @@ function MyMenu({
   onFocus,
   gridVariant,
   onGridVariantChange,
+  snapEnabled,
+  onSnapToggle,
 }) {
   const [activeToolbar, setActiveToolbar] = useState(null);
 
@@ -82,6 +84,8 @@ function MyMenu({
         className={`${activeToolbar === "view" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyPreferencesToolBar
+        snapEnabled={snapEnabled}
+        onSnapToggle={onSnapToggle}
         className={`${activeToolbar === "preferences" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
     </>
