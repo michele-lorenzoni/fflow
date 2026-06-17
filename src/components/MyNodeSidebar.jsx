@@ -31,7 +31,7 @@ function MyNodeSidebar() {
   const node = selected[0];
   const [themesOpen, setThemesOpen] = useState(false);
   const [openTheme, setOpenTheme] = useState(null);
-  const [selectedTriad, setSelectedTriad] = useState(null);
+  const selectedTriad = node?.data?.themeId ?? null;
 
   const patchStyle = (patch) => {
     if (!node) return;
@@ -190,16 +190,33 @@ function MyNodeSidebar() {
                             {t.triads.map((tr, i) => {
                               const triadId = `${t.name}::${i}`;
                               const isTriadSelected = selectedTriad === triadId;
+                              const applyTriad = () => {
+                                if (!node) return;
+                                if (isTriadSelected) {
+                                  const {
+                                    theme: _theme,
+                                    themeId: _themeId,
+                                    ...rest
+                                  } = node.data ?? {};
+                                  updateNodeData(node.id, rest);
+                                } else {
+                                  updateNodeData(node.id, {
+                                    ...node.data,
+                                    themeId: triadId,
+                                    theme: {
+                                      bg: tr.main,
+                                      border: tr.variant,
+                                      fg: tr.fg,
+                                    },
+                                  });
+                                }
+                              };
                               return (
                                 <button
                                   type="button"
                                   key={i}
                                   title={tr.usage}
-                                  onClick={() =>
-                                    setSelectedTriad(
-                                      isTriadSelected ? null : triadId,
-                                    )
-                                  }
+                                  onClick={applyTriad}
                                   className={`flex items-center gap-1 p-1 -m-1 text-left transition-colors ${
                                     isTriadSelected
                                       ? "bg-sky-50 outline outline-sky-500"

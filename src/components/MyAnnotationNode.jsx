@@ -1,7 +1,16 @@
 import { NodeResizer } from "@xyflow/react";
 import MyHandle from "./MyHandle";
 
-function MyAnnotationNode({ selected }) {
+function MyAnnotationNode({ selected, data }) {
+  const theme = data?.theme;
+  const rootStyle = theme
+    ? { backgroundColor: theme.bg, borderColor: theme.fg, color: theme.fg }
+    : undefined;
+  const barStyle = theme
+    ? { backgroundColor: theme.border, borderColor: theme.fg }
+    : undefined;
+  const textStyle = theme ? { color: theme.fg } : undefined;
+
   return (
     <>
       <NodeResizer
@@ -19,11 +28,18 @@ function MyAnnotationNode({ selected }) {
         }}
       />
 
-      <div className="shadow-md/5 box-border flex flex-col w-full h-full bg-menu-bg border border-menu-border text-menu-icon">
-        <div className="h-[10px] shrink-0 border-b border-menu-border bg-menu-light cursor-move" />
+      <div
+        style={rootStyle}
+        className="shadow-md/5 box-border flex flex-col w-full h-full bg-menu-bg border border-menu-border text-menu-icon"
+      >
+        <div
+          style={barStyle}
+          className="h-[10px] shrink-0 border-b border-menu-border bg-menu-light cursor-move"
+        />
         <textarea
           spellCheck="false"
           placeholder="// annotazione…"
+          style={textStyle}
           className="flex-1 bg-transparent text-menu-icon px-3 py-2 text-xs outline-0 resize-none placeholder:text-menu-icon/60 nodrag"
         />
         <MyHandle />

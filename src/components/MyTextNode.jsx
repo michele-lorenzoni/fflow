@@ -49,6 +49,20 @@ function MyTextNode({ id, selected, data }) {
   const lang = LANG_BY_KEY[langKey] ?? LANG_BY_KEY[DEFAULT_LANG];
   const Icon = lang.Icon;
   const title = data?.title ?? "hello_world";
+  const theme = data?.theme;
+  const rootStyle = theme
+    ? { backgroundColor: theme.bg, borderColor: theme.fg, color: theme.fg }
+    : undefined;
+  const chromeStyle = theme
+    ? {
+        backgroundColor: theme.border,
+        borderColor: theme.fg,
+        color: theme.fg,
+      }
+    : undefined;
+  const bodyStyle = theme
+    ? { backgroundColor: theme.bg, color: theme.fg }
+    : undefined;
 
   const onTitleChange = (e) => {
     updateNodeData(id, { ...data, title: e.target.value });
@@ -87,14 +101,21 @@ function MyTextNode({ id, selected, data }) {
         }}
       />
 
-      <div className="shadow-md/5 box-border flex flex-col w-full h-full bg-menu-bg border border-menu-border text-menu-icon">
+      <div
+        style={rootStyle}
+        className="shadow-md/5 box-border flex flex-col w-full h-full bg-menu-bg border border-menu-border text-menu-icon"
+      >
         {/* Header */}
-        <div className="flex items-center h-[32px] border-b border-menu-border">
+        <div
+          style={chromeStyle}
+          className="flex items-center h-[32px] border-b border-menu-border"
+        >
           <div ref={wrapperRef} className="relative h-full">
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className="flex items-center justify-center h-full w-[32px] border-r border-menu-border hover:bg-menu-light transition-all duration-200 nodrag"
+              style={chromeStyle}
+              className="flex items-center justify-center h-full w-[32px] border-r border-menu-border hover:bg-menu-light nodrag"
             >
               <Icon size={18} className="overflow-visible shrink-0" />
             </button>
@@ -132,11 +153,15 @@ function MyTextNode({ id, selected, data }) {
         <textarea
           spellCheck="false"
           placeholder="// scrivi qui…"
+          style={bodyStyle}
           className="flex-1 bg-menu-bg text-menu-icon px-3 py-2 text-xs outline-0 resize-none placeholder:text-menu-icon/60 nodrag"
         />
 
         {/* Footer */}
-        <div className="flex items-center justify-between h-[20px] px-3 border-t border-menu-border text-[10px]">
+        <div
+          style={chromeStyle}
+          className="flex items-center justify-between h-[20px] px-3 border-t border-menu-border text-[10px]"
+        >
           <span>{lang.label}</span>
           <span>UTF-8 · LF</span>
         </div>
