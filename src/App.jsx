@@ -58,6 +58,7 @@ const handlePoint = (node, handleId, fallbackSide) => {
 };
 
 import MyTextNode from "./components/MyTextNode";
+import MyAnnotationNode from "./components/MyAnnotationNode";
 import MyMenu from "./components/MyMenu";
 import MyStepEdge from "./components/MyStepEdge";
 import { computeDefaultCorners } from "./components/stepEdgeCorners";
@@ -79,7 +80,10 @@ const initialNodes = [
   },
 ];
 
-const nodeTypes = { myTextNode: MyTextNode };
+const nodeTypes = {
+  myTextNode: MyTextNode,
+  myAnnotationNode: MyAnnotationNode,
+};
 const edgeTypes = { myStep: MyStepEdge };
 
 function App() {
@@ -273,7 +277,7 @@ function App() {
     }
   };
 
-  const addNode = useCallback(() => {
+  const addCode = useCallback(() => {
     const width = 225;
     const height = 125;
     const center = screenToFlowPosition({
@@ -296,12 +300,36 @@ function App() {
     setNodes((nds) => [...nds, newNode]);
   }, [setNodes, screenToFlowPosition]);
 
+  const addAnnotation = useCallback(() => {
+    const width = 200;
+    const height = 100;
+    const center = screenToFlowPosition({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+    const jitter = () => Math.round((Math.random() - 0.5) * 80);
+
+    const newNode = {
+      id: `annotation-${Date.now()}`,
+      type: "myAnnotationNode",
+      position: {
+        x: center.x - width / 2 + jitter(),
+        y: center.y - height / 2 + jitter(),
+      },
+      data: {},
+      style: { width, height },
+    };
+
+    setNodes((nds) => [...nds, newNode]);
+  }, [setNodes, screenToFlowPosition]);
+
   return (
     <>
       <MyMenu
         onScreenshot={takeScreenshot}
         onExportSvg={exportSvg}
-        onAdd={addNode}
+        onAddCode={addCode}
+        onAddAnnotation={addAnnotation}
         onFocus={focusSelected}
         gridVariant={gridVariant}
         onGridVariantChange={setGridVariant}

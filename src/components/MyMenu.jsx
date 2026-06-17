@@ -11,7 +11,8 @@ import MyPreferencesToolBar from "./MyPreferencesToolBar";
 function MyMenu({
   onScreenshot,
   onExportSvg,
-  onAdd,
+  onAddCode,
+  onAddAnnotation,
   onFocus,
   gridVariant,
   onGridVariantChange,
@@ -72,7 +73,8 @@ function MyMenu({
         className={`${activeToolbar === "file" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyEditToolBar
-        onAdd={onAdd}
+        onAddCode={onAddCode}
+        onAddAnnotation={onAddAnnotation}
         className={`${activeToolbar === "edit" ? "top-[32px] opacity-100" : "top-0 opacity-0"}`}
       />
       <MyViewToolBar
